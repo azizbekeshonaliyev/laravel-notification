@@ -50,7 +50,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Notification::send($user, new InvoicePaid());
+        $delay = now()->addMinutes(10);
+
+        $user->notify(new InvoicePaid())->delay($delay);
+
+//        Notification::send($user, new InvoicePaid())->delay($delay);
 
         event(new Registered($user));
 
