@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-//        Notification::send($user, new InvoicePaid());
+        Notification::send($user, new InvoicePaid());
 
         event(new Registered($user));
 

@@ -46,4 +46,13 @@ class User extends Authenticatable
     {
         return $this->phone;
     }
+    public function routeNotificationForMail($notification)
+    {
+        // Return email address only...
+        return $this->email;
+
+        // Return email address and name...
+//        return [$this->email_address => $this->name];
+    }
+
 }
