@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
 
         $delay = now()->addMinutes(10);
 
-        $user->notify(new InvoicePaid())->delay($delay);
+        $user->notify((new InvoicePaid())->delay($delay));
 
 //        Notification::send($user, new InvoicePaid())->delay($delay);
 
