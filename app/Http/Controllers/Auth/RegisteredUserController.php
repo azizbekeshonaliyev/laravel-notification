@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessPodcast;
+use App\Mail\OrderShipped;
 use App\Models\User;
 use App\Notifications\InvoicePaid;
 use App\Providers\RouteServiceProvider;
@@ -10,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules;
 
@@ -50,9 +53,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $delay = now()->addMinutes(10);
+//        $delay = now()->addMinutes(10);
 
-        $user->notify((new InvoicePaid())->delay($delay));
+        $user->notify((new InvoicePaid()));
+//        ProcessPodcast::dispatch($user);
+//        Mail::to($user)->send(new OrderShipped());
 
 //        Notification::send($user, new InvoicePaid())->delay($delay);
 

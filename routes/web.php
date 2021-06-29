@@ -1,5 +1,6 @@
 <?php
 
+use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+//    auth()->user()->notify((new InvoicePaid()));
+
+    \App\Jobs\ProcessPodcast::dispatch(auth()->user())->delay(now()->addMinute());
     return view('welcome');
 });
 
