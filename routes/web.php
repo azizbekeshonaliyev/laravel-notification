@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
 //    Redis::set("products:1:count",100);
-    dd(Redis::persist("products:1:count"));
-
+//    dd(Redis::incr("products:1:count"));
+//
+//    Redis::set('name', 'Taylor');
+//
+//    $values = Redis::lrange('names', 5, 10);
+//
+//    dd($values);
 //    auth()->user()->notify((new InvoicePaid()));
 
 //    \App\Jobs\ProcessPodcast::dispatch(auth()->user())->delay(now()->addMinute());
