@@ -1,6 +1,6 @@
 <?php
 
-use App\Notifications\InvoicePaid;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+//    Redis::set("products:1:count",100);
+    dd(Redis::persist("products:1:count"));
+
 //    auth()->user()->notify((new InvoicePaid()));
 
-    \App\Jobs\ProcessPodcast::dispatch(auth()->user())->delay(now()->addMinute());
+//    \App\Jobs\ProcessPodcast::dispatch(auth()->user())->delay(now()->addMinute());
     return view('welcome');
 });
 
